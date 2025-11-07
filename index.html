@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form Validation System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>Dynamic Form Validation System</h1>
+                    <p>A complete form with essential fields and dynamic validation</p>
+                </div>
+                <div class="header-controls">
+                    <button id="themeToggle" class="theme-toggle" title="Cambiar tema">
+                        <span class="theme-icon">🌙</span>
+                        <span class="theme-text">Modo Oscuro</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <form id="registrationForm" class="form" novalidate>
+                <section class="form-section">
+                    <h2>Personal Information</h2>
+                    
+                    <div class="field-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" 
+                               id="firstName" 
+                               name="firstName" 
+                               required 
+                               minlength="2" 
+                               maxlength="50"
+                               data-validate-pattern='{"pattern": "^[a-zA-ZÀ-ÿ\\s]+$"}'>
+                        <small class="field-hint">Only letters and spaces allowed</small>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" 
+                               id="lastName" 
+                               name="lastName" 
+                               required 
+                               minlength="2" 
+                               maxlength="50"
+                               data-validate-pattern='{"pattern": "^[a-zA-ZÀ-ÿ\\s]+$"}'>
+                        <small class="field-hint">Only letters and spaces allowed</small>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" 
+                               id="email" 
+                               name="email" 
+                               required>
+                        <small class="field-hint">We'll never share your email</small>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" 
+                               id="phone" 
+                               name="phone"
+                               placeholder="+1234567890">
+                        <small class="field-hint">Include country code (optional)</small>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="birthDate">Date of Birth</label>
+                        <input type="date" 
+                               id="birthDate" 
+                               name="birthDate">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="age">Age *</label>
+                        <input type="number" 
+                               id="age" 
+                               name="age" 
+                               required
+                               min="13" 
+                               max="120"
+                               data-validate-age='{"min": 13, "max": 120}'>
+                        <small class="field-hint">Must be between 13 and 120 years old</small>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender">
+                            <option value="">Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                            <option value="prefer-not-to-say">Prefer not to say</option>
+                        </select>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <h2>Account Information</h2>
+                    
+                    <div class="field-group">
+                        <label for="username">Username *</label>
+                        <input type="text" 
+                               id="username" 
+                               name="username" 
+                               required 
+                               minlength="3" 
+                               maxlength="20"
+                               data-validate-pattern='{"pattern": "^[a-zA-Z0-9_]+$"}'>
+                        <small class="field-hint">3-20 characters, letters, numbers, and underscores only</small>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="password">Password *</label>
+                        <input type="password" 
+                               id="password" 
+                               name="password" 
+                               required
+                               data-validate-password='{"minLength": 8}'>
+                        <small class="field-hint">Must contain uppercase, lowercase, numbers, and special characters</small>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <input type="password" 
+                               id="confirmPassword" 
+                               name="confirmPassword" 
+                               required
+                               data-validate-confirmpassword='{"matchField": "password"}'>
+                        <small class="field-hint">Must match the password above</small>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="website">Personal Website</label>
+                        <input type="url" 
+                               id="website" 
+                               name="website"
+                               placeholder="https://example.com">
+                        <small class="field-hint">Include http:// or https://</small>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <h2>Address Information</h2>
+                    
+                    <div class="field-group">
+                        <label for="street">Street Address</label>
+                        <input type="text" 
+                               id="street" 
+                               name="street" 
+                               maxlength="100">
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label for="city">City</label>
+                            <input type="text" 
+                                   id="city" 
+                                   name="city" 
+                                   maxlength="50">
+                        </div>
+
+                        <div class="field-group">
+                            <label for="state">State/Province</label>
+                            <input type="text" 
+                                   id="state" 
+                                   name="state" 
+                                   maxlength="50">
+                        </div>
+
+                        <div class="field-group">
+                            <label for="zipCode">ZIP/Postal Code</label>
+                            <input type="text" 
+                                   id="zipCode" 
+                                   name="zipCode" 
+                                   maxlength="10"
+                                   data-validate-pattern='{"pattern": "^[A-Za-z0-9\\s\\-]+$"}'>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="country">Country</label>
+                        <select id="country" name="country">
+                            <option value="">Select country</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="UK">United Kingdom</option>
+                            <option value="AU">Australia</option>
+                            <option value="DE">Germany</option>
+                            <option value="FR">France</option>
+                            <option value="JP">Japan</option>
+                            <option value="MX">Mexico</option>
+                            <option value="BR">Brazil</option>
+                            <option value="IN">India</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <h2>Preferences</h2>
+                    
+                    <div class="field-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" 
+                                  name="bio" 
+                                  rows="4" 
+                                  maxlength="500"
+                                  placeholder="Tell us about yourself..."></textarea>
+                        <small class="field-hint">Maximum 500 characters</small>
+                    </div>
+
+                    <div class="field-group">
+                        <fieldset>
+                            <legend>Newsletter Preferences</legend>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" 
+                                           id="newsletter" 
+                                           name="newsletter" 
+                                           value="general">
+                                    <span>General Newsletter</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" 
+                                           id="promotions" 
+                                           name="promotions" 
+                                           value="promotions">
+                                    <span>Promotions & Offers</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" 
+                                           id="updates" 
+                                           name="updates" 
+                                           value="updates">
+                                    <span>Product Updates</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="field-group">
+                        <fieldset>
+                            <legend>Communication Method *</legend>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" 
+                                           id="commEmail" 
+                                           name="communicationMethod" 
+                                           value="email" 
+                                           required>
+                                    <span>Email</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" 
+                                           id="commPhone" 
+                                           name="communicationMethod" 
+                                           value="phone">
+                                    <span>Phone</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" 
+                                           id="commSms" 
+                                           name="communicationMethod" 
+                                           value="sms">
+                                    <span>SMS</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="field-group">
+                        <label class="checkbox-label terms-checkbox">
+                            <input type="checkbox" 
+                                   id="terms" 
+                                   name="terms" 
+                                   required>
+                            <span>I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a> *</span>
+                        </label>
+                    </div>
+                </section>
+
+                <div class="form-actions">
+                    <button type="button" id="resetBtn" class="btn btn-secondary">Reset Form</button>
+                    <button type="submit" class="btn btn-primary">Register Account</button>
+                </div>
+
+                <div id="formSummary" class="form-summary" style="display: none;">
+                    <h3>Form Summary</h3>
+                    <div id="summaryContent"></div>
+                </div>
+            </form>
+        </main>
+
+        <aside class="sidebar">
+            <div class="info-panel">
+                <h3>Validation Features</h3>
+                <ul>
+                    <li>✅ Real-time validation</li>
+                    <li>✅ Required field validation</li>
+                    <li>✅ Email format validation</li>
+                    <li>✅ Phone number validation</li>
+                    <li>✅ Password strength checking</li>
+                    <li>✅ Confirm password matching</li>
+                    <li>✅ Length limitations</li>
+                    <li>✅ Pattern matching</li>
+                    <li>✅ Number range validation</li>
+                    <li>✅ URL format validation</li>
+                    <li>✅ Date validation</li>
+                    <li>✅ Custom validation rules</li>
+                </ul>
+            </div>
+
+            <div class="dynamic-section">
+                <h3>Add Custom Field</h3>
+                <button id="addFieldBtn" class="btn btn-outline">Add Custom Field</button>
+                <div id="customFieldContainer"></div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/validator.js"></script>
+    <script src="js/form-handler.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

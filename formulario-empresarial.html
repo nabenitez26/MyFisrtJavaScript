@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Empresarial - Validaciones Avanzadas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>Registro de Empresa</h1>
+                    <p>Formulario empresarial con validaciones complementarias y mejores prácticas</p>
+                </div>
+                <div class="header-controls">
+                    <button id="themeToggle" class="theme-toggle" title="Cambiar tema">
+                        <span class="theme-icon">🌙</span>
+                        <span class="theme-text">Modo Oscuro</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <form id="empresarialForm" class="form" novalidate>
+                <!-- Información Básica de la Empresa -->
+                <section class="form-section">
+                    <h2>Información de la Empresa</h2>
+                    
+                    <div class="field-group">
+                        <label for="razonSocial">Razón Social *</label>
+                        <input type="text" 
+                               id="razonSocial" 
+                               name="razonSocial" 
+                               required 
+                               minlength="3" 
+                               maxlength="100"
+                               data-validate-pattern='{"pattern": "^[a-zA-ZÀ-ÿ0-9\\s\\.\\,\\-]+$"}'>
+                        <small class="field-hint">Nombre completo y legal de la empresa</small>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label for="nit">NIT/RUC *</label>
+                            <input type="text" 
+                                   id="nit" 
+                                   name="nit" 
+                                   required 
+                                   minlength="8" 
+                                   maxlength="15"
+                                   data-validate-pattern='{"pattern": "^[0-9\\-\\.]+$"}'>
+                            <small class="field-hint">Número de identificación tributaria</small>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="codigoEmpresa">Código Empresa *</label>
+                            <input type="text" 
+                                   id="codigoEmpresa" 
+                                   name="codigoEmpresa" 
+                                   required 
+                                   minlength="3" 
+                                   maxlength="10"
+                                   data-validate-pattern='{"pattern": "^[A-Z]{2,3}[0-9]{3,7}$"}'
+                                   placeholder="EMP001">
+                            <small class="field-hint">2-3 letras seguidas de 3-7 números</small>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="tipoEmpresa">Tipo de Empresa *</label>
+                        <select id="tipoEmpresa" name="tipoEmpresa" required>
+                            <option value="">Seleccione tipo de empresa</option>
+                            <option value="SA">Sociedad Anónima (S.A.)</option>
+                            <option value="SRL">Sociedad de Responsabilidad Limitada (S.R.L.)</option>
+                            <option value="UNIPERSONAL">Empresa Unipersonal</option>
+                            <option value="COOPERATIVA">Cooperativa</option>
+                            <option value="FUNDACION">Fundación</option>
+                            <option value="ONG">Organización No Gubernamental</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="sector">Sector Económico *</label>
+                        <select id="sector" name="sector" required>
+                            <option value="">Seleccione sector</option>
+                            <option value="TECNOLOGIA">Tecnología</option>
+                            <option value="SERVICIOS">Servicios</option>
+                            <option value="MANUFACTURA">Manufactura</option>
+                            <option value="COMERCIO">Comercio</option>
+                            <option value="CONSTRUCCION">Construcción</option>
+                            <option value="EDUCACION">Educación</option>
+                            <option value="SALUD">Salud</option>
+                            <option value="AGRICULTURA">Agricultura</option>
+                            <option value="TURISMO">Turismo</option>
+                            <option value="OTRO">Otro</option>
+                        </select>
+                    </div>
+                </section>
+
+                <!-- Información Financiera -->
+                <section class="form-section">
+                    <h2>Información Financiera</h2>
+                    
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label for="capitalSocial">Capital Social *</label>
+                            <input type="number" 
+                                   id="capitalSocial" 
+                                   name="capitalSocial" 
+                                   required 
+                                   min="1000" 
+                                   max="999999999"
+                                   step="0.01"
+                                   data-validate-price="true">
+                            <small class="field-hint">Mínimo $1,000</small>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="ventasAnuales">Ventas Anuales Estimadas</label>
+                            <input type="number" 
+                                   id="ventasAnuales" 
+                                   name="ventasAnuales" 
+                                   min="0" 
+                                   max="999999999"
+                                   step="0.01"
+                                   data-validate-price="true">
+                            <small class="field-hint">Ventas proyectadas para el año</small>
+                        </div>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label for="numeroEmpleados">Número de Empleados *</label>
+                            <input type="number" 
+                                   id="numeroEmpleados" 
+                                   name="numeroEmpleados" 
+                                   required 
+                                   min="1" 
+                                   max="50000"
+                                   data-validate-inventory="true">
+                            <small class="field-hint">Número actual de empleados</small>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="anoFundacion">Año de Fundación *</label>
+                            <input type="number" 
+                                   id="anoFundacion" 
+                                   name="anoFundacion" 
+                                   required 
+                                   min="1800" 
+                                   max="2025"
+                                   placeholder="2020">
+                            <small class="field-hint">Año en que se fundó la empresa</small>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Representante Legal -->
+                <section class="form-section">
+                    <h2>Representante Legal</h2>
+                    
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label for="nombreRepresentante">Nombre Completo *</label>
+                            <input type="text" 
+                                   id="nombreRepresentante" 
+                                   name="nombreRepresentante" 
+                                   required 
+                                   minlength="3" 
+                                   maxlength="80"
+                                   data-validate-pattern='{"pattern": "^[a-zA-ZÀ-ÿ\\s]+$"}'>
+                            <small class="field-hint">Nombre del representante legal</small>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="cedulaRepresentante">Cédula/Pasaporte *</label>
+                            <input type="text" 
+                                   id="cedulaRepresentante" 
+                                   name="cedulaRepresentante" 
+                                   required 
+                                   minlength="6" 
+                                   maxlength="20"
+                                   data-validate-pattern='{"pattern": "^[A-Z0-9\\-]+$"}'>
+                            <small class="field-hint">Documento de identidad</small>
+                        </div>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label for="emailRepresentante">Email Corporativo *</label>
+                            <input type="email" 
+                                   id="emailRepresentante" 
+                                   name="emailRepresentante" 
+                                   required>
+                            <small class="field-hint">Email oficial de la empresa</small>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="telefonoRepresentante">Teléfono *</label>
+                            <input type="tel" 
+                                   id="telefonoRepresentante" 
+                                   name="telefonoRepresentante" 
+                                   required
+                                   placeholder="+57 300 123 4567">
+                            <small class="field-hint">Teléfono de contacto</small>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Información de Contacto -->
+                <section class="form-section">
+                    <h2>Información de Contacto</h2>
+                    
+                    <div class="field-group">
+                        <label for="direccionFiscal">Dirección Fiscal *</label>
+                        <textarea id="direccionFiscal" 
+                                  name="direccionFiscal" 
+                                  rows="3" 
+                                  required
+                                  minlength="10" 
+                                  maxlength="200"
+                                  placeholder="Calle, número, barrio, ciudad"></textarea>
+                        <small class="field-hint">Dirección completa registrada</small>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label for="ciudadEmpresa">Ciudad *</label>
+                            <input type="text" 
+                                   id="ciudadEmpresa" 
+                                   name="ciudadEmpresa" 
+                                   required 
+                                   minlength="2" 
+                                   maxlength="50"
+                                   data-validate-pattern='{"pattern": "^[a-zA-ZÀ-ÿ\\s]+$"}'>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="codigoPostal">Código Postal</label>
+                            <input type="text" 
+                                   id="codigoPostal" 
+                                   name="codigoPostal" 
+                                   minlength="4" 
+                                   maxlength="10"
+                                   data-validate-pattern='{"pattern": "^[0-9A-Za-z\\-]+$"}'>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="sitioWeb">Sitio Web</label>
+                        <input type="url" 
+                               id="sitioWeb" 
+                               name="sitioWeb"
+                               placeholder="https://www.ejemplo.com">
+                        <small class="field-hint">URL del sitio web corporativo</small>
+                    </div>
+                </section>
+
+                <!-- Validaciones Cruzadas -->
+                <section class="form-section">
+                    <h2>Información Adicional</h2>
+                    
+                    <div class="field-group">
+                        <label for="passwordEmpresa">Contraseña del Sistema *</label>
+                        <input type="password" 
+                               id="passwordEmpresa" 
+                               name="passwordEmpresa" 
+                               required
+                               data-validate-password='{"minLength": 10}'>
+                        <small class="field-hint">Mínimo 10 caracteres con mayúsculas, minúsculas, números y símbolos</small>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="confirmarPassword">Confirmar Contraseña *</label>
+                        <input type="password" 
+                               id="confirmarPassword" 
+                               name="confirmarPassword" 
+                               required
+                               data-validate-confirmpassword='{"matchField": "passwordEmpresa"}'>
+                        <small class="field-hint">Debe coincidir con la contraseña anterior</small>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="fechaInicioOperaciones">Fecha de Inicio de Operaciones *</label>
+                        <input type="date" 
+                               id="fechaInicioOperaciones" 
+                               name="fechaInicioOperaciones" 
+                               required
+                               data-validate-daterange='{"after": "1900-01-01", "before": "2025-12-31"}'>
+                        <small class="field-hint">Fecha en que la empresa comenzó operaciones</small>
+                    </div>
+
+                    <div class="field-group">
+                        <fieldset>
+                            <legend>Servicios que Ofrece *</legend>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" 
+                                           name="servicios" 
+                                           value="consultoria"
+                                           data-validate-minselected='{"min": 1, "group": "servicios"}'>
+                                    <span>Consultoría</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" 
+                                           name="servicios" 
+                                           value="desarrollo">
+                                    <span>Desarrollo de Software</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" 
+                                           name="servicios" 
+                                           value="soporte">
+                                    <span>Soporte Técnico</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" 
+                                           name="servicios" 
+                                           value="capacitacion">
+                                    <span>Capacitación</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" 
+                                           name="servicios" 
+                                           value="outsourcing">
+                                    <span>Outsourcing</span>
+                                </label>
+                            </div>
+                            <small class="field-hint">Seleccione al menos un servicio</small>
+                        </fieldset>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="observaciones">Observaciones</label>
+                        <textarea id="observaciones" 
+                                  name="observaciones" 
+                                  rows="4" 
+                                  maxlength="500"
+                                  placeholder="Información adicional relevante..."></textarea>
+                        <small class="field-hint">Máximo 500 caracteres</small>
+                    </div>
+
+                    <div class="field-group">
+                        <label class="checkbox-label terms-checkbox">
+                            <input type="checkbox" 
+                                   id="aceptaTerminos" 
+                                   name="aceptaTerminos" 
+                                   required>
+                            <span>Acepto los <a href="#" target="_blank">Términos y Condiciones</a> del registro empresarial *</span>
+                        </label>
+                    </div>
+
+                    <div class="field-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" 
+                                   id="autorizaDatos" 
+                                   name="autorizaDatos" 
+                                   required>
+                            <span>Autorizo el tratamiento de datos personales según la <a href="#" target="_blank">Política de Privacidad</a> *</span>
+                        </label>
+                    </div>
+                </section>
+
+                <div class="form-actions">
+                    <button type="button" id="resetEmpresarialBtn" class="btn btn-secondary">Limpiar Formulario</button>
+                    <button type="button" id="validateAllBtn" class="btn btn-outline">Validar Todo</button>
+                    <button type="submit" class="btn btn-primary">Registrar Empresa</button>
+                </div>
+
+                <div id="empresarialSummary" class="form-summary" style="display: none;">
+                    <h3>Resumen del Registro</h3>
+                    <div id="empresarialSummaryContent"></div>
+                </div>
+            </form>
+        </main>
+
+        <aside class="sidebar">
+            <div class="info-panel">
+                <h3>Validaciones Implementadas</h3>
+                <ul>
+                    <li>✅ <strong>Básicas:</strong> Requeridos, longitudes</li>
+                    <li>✅ <strong>Formatos:</strong> Email, teléfono, URL</li>
+                    <li>✅ <strong>Patrones:</strong> NIT, códigos, nombres</li>
+                    <li>✅ <strong>Rangos:</strong> Números, fechas, años</li>
+                    <li>✅ <strong>Financieras:</strong> Capital, ventas</li>
+                    <li>✅ <strong>Cruzadas:</strong> Confirmar contraseña</li>
+                    <li>✅ <strong>Agrupadas:</strong> Selección mínima</li>
+                    <li>✅ <strong>Condicionales:</strong> Campos dependientes</li>
+                </ul>
+            </div>
+
+            <div class="dynamic-section">
+                <h3>Estado de Validación</h3>
+                <div id="validationStatus">
+                    <p>Completa el formulario para ver el estado de validación en tiempo real.</p>
+                </div>
+            </div>
+
+            <div class="dynamic-section">
+                <h3>Mejores Prácticas</h3>
+                <ul style="font-size: 0.9em; color: #6b7280;">
+                    <li>🎯 Validación en tiempo real</li>
+                    <li>📋 Mensajes claros y específicos</li>
+                    <li>🔄 Reutilización de reglas</li>
+                    <li>📱 Diseño responsive</li>
+                    <li>♿ Accesibilidad incluida</li>
+                    <li>🚀 Extensible y mantenible</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/validator.js"></script>
+    <script src="js/form-handler.js"></script>
+    <script src="js/formulario-empresarial.js"></script>
+</body>
+</html>
